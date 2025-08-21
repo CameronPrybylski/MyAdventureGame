@@ -1,0 +1,28 @@
+# Build files
+/build/
+bin/
+obj/
+CMakeFiles/
+CMakeCache.txt
+*.cmake
+Makefile
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Engine build artifacts (but not the engine source!)
+engine/build/
+engine/bin/
+engine/CMakeFiles/
+engine/CMakeCache.txt
+
