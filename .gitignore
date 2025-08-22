@@ -1,28 +1,37 @@
-# Build files
-/build/
-bin/
-obj/
+# macOS system files
+.DS_Store
+
+# Build directories (if any)
+build/
+engine/build/
+game/build/
+
+# CMake generated files
 CMakeFiles/
 CMakeCache.txt
-*.cmake
+cmake_install.cmake
 Makefile
 
-# IDE files
+# Compiled binaries and objects
+*.o
+*.obj
+*.so
+*.dll
+*.exe
+*.out
+*.a
+*.lib
+
+# Editor / IDE files
 .vscode/
 .idea/
 *.swp
-*.swo
+*.user
+*.suo
 
-# OS files
-.DS_Store
-Thumbs.db
-
-# Logs
+# Logs and temp files
 *.log
+*.tmp
 
-# Engine build artifacts (but not the engine source!)
-engine/build/
-engine/bin/
-engine/CMakeFiles/
-engine/CMakeCache.txt
-
+# Git submodule internal files (should be managed by Git, but to be safe)
+engine/.git/modules/

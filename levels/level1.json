@@ -1,0 +1,83 @@
+{
+    "objects" : {
+        "obstacles": [
+            {
+                "name": "obstacle1",
+                "position": [0.0, 400.0, 0.0],
+                "scale": [10.0, 800.0, 0.0],
+                "rotation": [0.0, 0.0, 0.0],
+                "velocity": [0.0, 0.0, 0.0],
+                "color": [0.0, 0.0, 1.0, 1.0],
+                "isStatic": true,
+                "texturePath" : ""
+            },
+            {
+                "name": "obstacle2",
+                "position": [400.0, 150.0, 0.0],
+                "scale": [400.0, 50.0, 0.0],
+                "rotation": [0.0, 0.0, 0.0],
+                "velocity": [0.0, 0.0, 0.0],
+                "color": [1.0, 0.0, 0.0, 1.0],
+                "isStatic": true,
+                "texturePath" : ""
+            },
+            {
+                "name": "obstacle3",
+                "position": [400.0, 75.0, 0.0],
+                "scale": [400.0, 50.0, 0.0],
+                "rotation": [0.0, 0.0, 0.0],
+                "velocity": [0.0, 0.0, 0.0],
+                "color": [0.0, 0.0, 1.0, 1.0],
+                "isStatic": true,
+                "texturePath" : ""
+            },
+            {
+                "name": "obstacle4",
+                "position": [1200.0, 75.0, 0.0],
+                "scale": [400.0, 50.0, 0.0],
+                "rotation": [0.0, 0.0, 0.0],
+                "velocity": [0.0, 0.0, 0.0],
+                "color": [0.0, 0.0, 1.0, 1.0],
+                "isStatic": true,
+                "texturePath" : ""
+            },
+            {
+                "name": "obstacle5",
+                "position": [-5.0, 400.0, 0.0],
+                "scale": [10.0, 800.0, 0.0],
+                "rotation": [0.0, 0.0, 0.0],
+                "velocity": [0.0, 0.0, 0.0],
+                "color": [0.0, 0.0, 1.0, 1.0],
+                "isStatic": true,
+                "texturePath" : ""
+            },
+            {
+                "name": "obstacle6",
+                "position": [1067.0, 400.0, 0.0],
+                "scale": [10.0, 800.0, 0.0],
+                "rotation": [0.0, 0.0, 0.0],
+                "velocity": [0.0, 0.0, 0.0],
+                "color": [0.0, 0.0, 1.0, 1.0],
+                "isStatic": true,
+                "texturePath" : ""
+            }
+        ],
+        "player" : [
+            {
+                "name": "player",
+                "position": [150.0, 75.0, 0.0],
+                "scale": [50.0, 50.0, 50.0],
+                "rotation" : [0.0, 0.0, 0.0],
+                "velocity": [0.0, 0.0, 0.0],
+                "color": [1.0, 1.0, 1.0, 0.0],
+                "isStatic": false,
+                "texturePath" : "/Users/cameronprzybylski/Documents/C++/C++ Projects/MyPlatformer/textures/Mario-8bit.png"
+            }
+        ]
+        
+    },
+    "levelParams" : {
+        "completionDist" : 3500.0,
+        "nextLevel" : "levelTwo"
+    }
+}
