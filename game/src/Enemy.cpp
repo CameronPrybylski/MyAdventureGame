@@ -31,7 +31,6 @@ void Enemy::OnEvent(const Input &input)
 
 void Enemy::Update(float dt)
 {
-    std::cout << transform.position.x << std::endl;
     if(transform.position.x < 700.0f)
     {
         rigidBody.velocity.x *= -1;
