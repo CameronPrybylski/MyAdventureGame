@@ -54,6 +54,9 @@ void Level::LoadLevel(std::string filepath)
                 player = std::make_shared<Player>(position, scale, color, texturePath, name, isStatic);
                 go = player;
                 AddObject(obst.value("name", "Unnamed"), go);
+                go = std::make_shared<Sword>(position, glm::vec3(45.0f, 5.0f, 0.0f), glm::vec3(0.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f), "", "sword" ,false);
+                player->AddItem("sword", go);
+                AddObject("sword", go);
             }
             else if(objs.key() == "enemies"){
                 std::shared_ptr<Enemy> enemy = std::make_shared<Enemy>(position, scale, velocity, color, "", name, isStatic);
@@ -146,9 +149,11 @@ void Level::UpdateCamera()
 {
     float playerPositionChangeX = player->transform.position.x - player->rigidBody.previousPosition.x;
     float playerPositionChangeY = player->transform.position.y - player->rigidBody.previousPosition.y;
+    //glm::vec3 playerPositionChange(playerPositionChangeX, playerPositionChangeY, 0.0f);
     glm::vec3 playerPositionChange(0.0f);
     float changeX = 0.0f;
     float changeY = 0.0f;
+    
     if(  player->transform.position.x >= rightScreenEdge || player->transform.position.x <= leftScreenEdge)
     {
         changeX = screenWidth;
@@ -173,5 +178,6 @@ void Level::UpdateCamera()
         topScreenEdge += changeY;
         bottomScreenEdge += changeY;
     }
+
     camera.OnUpdate(playerPositionChange);
 }

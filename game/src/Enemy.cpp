@@ -47,16 +47,10 @@ void Enemy::Update(const Input &input, float dt)
     {
         transform.position.y = -500.0f;
     }
+    transform.rotation.z += 10.0f;
 }
 void Enemy::OnCollision(std::shared_ptr<GameObject> collidedObj, glm::vec2 collisionNormal, float dt)
 {
-    if(collisionNormal.x == 0 && collisionNormal.y == -1)
-    {
-        if(collidedObj->name.find("player") != std::string::npos)
-        {
-            isAlive = false;
-        }
-    }
     if(collisionNormal.x == 1 && collisionNormal.y == 0)
     {
         rigidBody.velocity.x = abs(velocity.x);
@@ -64,6 +58,18 @@ void Enemy::OnCollision(std::shared_ptr<GameObject> collidedObj, glm::vec2 colli
     if(collisionNormal.x == -1 && collisionNormal.y == 0)
     {
         rigidBody.velocity.x = -abs(velocity.x);
+    }
+    if(collisionNormal.x == 0 && collisionNormal.y == 1)
+    {
+        rigidBody.velocity.y = abs(velocity.y);
+    }
+    if(collisionNormal.x == 0 && collisionNormal.y == -1)
+    {
+        rigidBody.velocity.y = -abs(velocity.y);
+    }
+    if(collidedObj->name == "sword")
+    {
+        isAlive = false;
     }
 }
 

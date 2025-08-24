@@ -6,6 +6,7 @@ add_executable(MyAdventureGame
     src/Level.cpp
     src/GameOver.cpp
     src/Player.cpp
+    src/Sword.cpp
     src/Obstacle.cpp
     src/Enemy.cpp
     # Add your game source files here

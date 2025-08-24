@@ -1,5 +1,6 @@
 #pragma once
 #include <Engine/Scene/GameObject.h>
+#include <Game/Sword.h>
 
 class Player : public GameObject {
 
@@ -12,12 +13,17 @@ public:
     void Render(Renderer& renderer, const Camera& camera) override;
     void OnCollision(std::shared_ptr<GameObject> collidedObj, glm::vec2 collisionNormal, float dt) override;
 
-    void Jump();
-    void Hit(float dt);
+    void Hit(glm::vec2 collisionNormal, float dt);
+    void AddItem(std::string name, std::shared_ptr<GameObject> item);
 
     bool hit = false;
     bool alive = true;
+    bool usingSword = false;
+    std::string positionFacing = "Down";
 
     int hp;
+    float timeSinceHit = 0.0f;
+
+    std::unordered_map<std::string, std::shared_ptr<GameObject>> items;
 
 };
