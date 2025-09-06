@@ -39,14 +39,14 @@ void Player::OnEvent(const Input& input)
     if(input.IsKeyDown("L"))
     {
         usingSword = true;
-        items["sword"]->transform.position.x = transform.position.x + items["sword"]->transform.scale.x;
-        items["sword"]->transform.position.y = transform.position.y;
+        //items["sword"]->transform.position.x = transform.position.x + items["sword"]->transform.scale.x;
+        //items["sword"]->transform.position.y = transform.position.y;
     }
     else
     {
         usingSword = false;
-        items["sword"]->transform.position.x = transform.position.x;
-        items["sword"]->transform.position.y = transform.position.y;
+        //items["sword"]->transform.position.x = transform.position.x;
+        //items["sword"]->transform.position.y = transform.position.y;
     }
 }
 
@@ -99,47 +99,11 @@ void Player::Update(const Input& input, float dt)
     if(transform.position.y >= 800)
     {
         //transform.position.y = 800.0f;
-    }if(transform.position.y < 0.0f || hp <= 0){
+    }if(hp <= 0){
         alive = false;
     }
-    if(usingSword)
-    {
-        if(input.IsKeyDown("L"))
-        {
-            usingSword = true;
-            if(positionFacing == "Right")
-            {
-                items["sword"]->transform.position.x = transform.position.x + items["sword"]->transform.scale.x;
-                items["sword"]->transform.position.y = transform.position.y;
-                items["sword"]->transform.rotation.z = 0.0f;
-            }
-            else if(positionFacing == "Left")
-            {
-                items["sword"]->transform.position.x = transform.position.x - items["sword"]->transform.scale.x;
-                items["sword"]->transform.position.y = transform.position.y;
-                items["sword"]->transform.rotation.z = 0.0f;
-            }
-            else if(positionFacing == "Up")
-            {
-                items["sword"]->transform.position.x = transform.position.x;
-                items["sword"]->transform.position.y = transform.position.y + items["sword"]->transform.scale.x;
-                items["sword"]->transform.rotation.z = 90.0f;
 
-            }
-            else if(positionFacing == "Down")
-            {
-                items["sword"]->transform.position.x = transform.position.x;
-                items["sword"]->transform.position.y = transform.position.y - items["sword"]->transform.scale.x;
-                items["sword"]->transform.rotation.z = 90.0f;
-            }
-        }
-        else
-        {
-            usingSword = false;
-            items["sword"]->transform.position.x = transform.position.x;
-            items["sword"]->transform.position.y = transform.position.y;
-        }
-    }
+    PositionSword();
 }
 
 void Player::OnCollision(std::shared_ptr<GameObject> collidedObj, glm::vec2 collisionNormal, float dt)
@@ -175,4 +139,29 @@ void Player::Hit(glm::vec2 collisionNormal, float dt)
 void Player::AddItem(std::string name, std::shared_ptr<GameObject> item)
 {
     items[name] = item;
+}
+
+void Player::PositionSword()
+{
+    Transform swordTransform = items["sword"]->transform;
+    swordTransform.position = transform.position;
+    float swordScale = swordTransform.scale.x;
+    if(usingSword)
+    {
+        if(positionFacing == "Down" || positionFacing == "Left")
+        {
+            swordScale *= -1;
+        }
+        if(positionFacing == "Right" || positionFacing == "Left")
+        {
+            swordTransform.position.x = transform.position.x + swordScale;
+            swordTransform.rotation.z = 0.0f;
+        }
+        else if(positionFacing == "Up" || positionFacing == "Down")
+        {
+            swordTransform.position.y = transform.position.y + swordScale;
+            swordTransform.rotation.z = 90.0f;
+        }
+    }
+    items["sword"]->transform = swordTransform;
 }

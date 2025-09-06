@@ -14,6 +14,8 @@ public:
     void OnCollision(std::shared_ptr<GameObject> collidedObj, glm::vec2 collisionNormal, float dt) override;
 
     bool usingSword;
+    float length;
+    float width;
    // std::shared_ptr<Player> player;
 
 };

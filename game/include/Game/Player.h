@@ -15,6 +15,7 @@ public:
 
     void Hit(glm::vec2 collisionNormal, float dt);
     void AddItem(std::string name, std::shared_ptr<GameObject> item);
+    void PositionSword();
 
     bool hit = false;
     bool alive = true;

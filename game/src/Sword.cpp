@@ -11,6 +11,8 @@ Sword::Sword(glm::vec3 position, glm::vec3 scale, glm::vec3 velocity, glm::vec4 
     this->name = name;
     //this->player = player;
     usingSword = false;
+    length = scale.x;
+    width = scale.y;
     if(texturePath != ""){
         shaderName = "textureShader";
         texture.Create(texturePath);
@@ -29,10 +31,14 @@ void Sword::OnEvent(const Input &input)
     if(input.IsKeyDown("L"))
     {
         usingSword = true;
+        transform.scale.x = length;
+        transform.scale.y = width;
     }
     else
     {
         usingSword = false;
+        transform.scale.x = 5.0f;
+        transform.scale.y = 5.0f;
     }
 }
 

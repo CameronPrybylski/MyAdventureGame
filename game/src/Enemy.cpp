@@ -13,6 +13,7 @@ Enemy::Enemy(glm::vec3 position, glm::vec3 scale, glm::vec3 velocity, glm::vec4 
     this->name = name;
     this->type = "Enemy";
     this->velocity = velocity;
+    transform.rotation.z += 45.0f;
     if(texturePath != ""){
         shaderName = "textureShader";
         texture.Create(texturePath);
@@ -47,7 +48,7 @@ void Enemy::Update(const Input &input, float dt)
     {
         transform.position.y = -500.0f;
     }
-    transform.rotation.z += 10.0f;
+    //transform.rotation.z += 10.0f;
 }
 void Enemy::OnCollision(std::shared_ptr<GameObject> collidedObj, glm::vec2 collisionNormal, float dt)
 {
