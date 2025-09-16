@@ -30,6 +30,8 @@ private:
     std::string filepath;
     float completionDist;
     std::string nextLevel;
+    int cameraMoves = 0;
+    bool cameraMove = false;
 
 
 };

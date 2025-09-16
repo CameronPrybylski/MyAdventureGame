@@ -54,7 +54,7 @@ void Level::LoadLevel(std::string filepath)
                 player = std::make_shared<Player>(position, scale, color, texturePath, name, isStatic);
                 go = player;
                 AddObject(obst.value("name", "Unnamed"), go);
-                go = std::make_shared<Sword>(position, glm::vec3(45.0f, 5.0f, 0.0f), glm::vec3(0.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f), "", "sword" ,false);
+                go = std::make_shared<Sword>(position, glm::vec3(45.0f, 45.0f, 0.0f), glm::vec3(0.0f), glm::vec4(0.0f, 0.0f, 0.0f, 0.0f), "/Users/cameronprzybylski/Documents/C++/C++ Projects/MyAdventureGame/textures/sword.png", "sword" ,false);
                 player->AddItem("sword", go);
                 AddObject("sword", go);
             }
@@ -63,6 +63,11 @@ void Level::LoadLevel(std::string filepath)
                 go = enemy;
                 AddObject(obst.value("name", "Unnamed"), go);
                 enemies.push_back(enemy);
+            }
+            else if(objs.key() == "aground"){
+                glm::vec3 rotation = {obst["rotation"][0], obst["rotation"][1], obst["rotation"][2]};
+                go = std::make_shared<Obstacle>(position, scale, rotation, velocity, color, texturePath, name, isStatic);
+                AddObject(obst.value("name", "Unnamed"), go);
             }
         }
     }
@@ -121,7 +126,7 @@ void Level::OnUpdate(const Input& input, PhysicsSystem &physics, float dt)
         EndScene("gameOver");
     }
     if(player->transform.position.x + player->transform.scale.x >= completionDist){
-        EndScene(nextLevel);
+        //EndScene(nextLevel);
     }
 }
 
@@ -147,37 +152,41 @@ void Level::OnCollision(std::vector<CollisionEvent> collisions, float dt)
 
 void Level::UpdateCamera()
 {
-    float playerPositionChangeX = player->transform.position.x - player->rigidBody.previousPosition.x;
-    float playerPositionChangeY = player->transform.position.y - player->rigidBody.previousPosition.y;
-    //glm::vec3 playerPositionChange(playerPositionChangeX, playerPositionChangeY, 0.0f);
     glm::vec3 playerPositionChange(0.0f);
     float changeX = 0.0f;
     float changeY = 0.0f;
     
     if(  player->transform.position.x >= rightScreenEdge || player->transform.position.x <= leftScreenEdge)
     {
+        cameraMove = true;
         changeX = screenWidth;
-        if(playerPositionChangeX < 0.0f)
-        {
+        if(player->transform.position.x <= leftScreenEdge){
             changeX *= -1;
         }
-
-        playerPositionChange.x = changeX;
-        rightScreenEdge += changeX;
-        leftScreenEdge += changeX;
+        playerPositionChange.x = changeX / 50;
     }
     if(  player->transform.position.y >= topScreenEdge || player->transform.position.y <= bottomScreenEdge)
     {
+        cameraMove = true;
         changeY = screenHeight;
-        if(playerPositionChangeY < 0.0f)
-        {
+        if(player->transform.position.y <= bottomScreenEdge){
             changeY *= -1;
         }
-
-        playerPositionChange.y = changeY;
+        playerPositionChange.y = changeY / 50;
+    }
+    if(cameraMoves < 50 && cameraMove)
+    { 
+        camera.OnUpdate(playerPositionChange);
+        cameraMoves++;
+        player->stop = true;
+    }
+    else if(cameraMoves >= 50){
+        cameraMoves = 0;
+        cameraMove = false;
         topScreenEdge += changeY;
         bottomScreenEdge += changeY;
+        rightScreenEdge += changeX;
+        leftScreenEdge += changeX;
+        player->stop = false;
     }
-
-    camera.OnUpdate(playerPositionChange);
 }

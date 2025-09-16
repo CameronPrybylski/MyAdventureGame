@@ -48,6 +48,11 @@ void Player::OnEvent(const Input& input)
         //items["sword"]->transform.position.x = transform.position.x;
         //items["sword"]->transform.position.y = transform.position.y;
     }
+    if(stop)
+    {
+        rigidBody.velocity.x = 0.0f;
+        rigidBody.velocity.y = 0.0f;
+    }
 }
 
 void Player::Update(const Input& input, float dt)
@@ -96,9 +101,10 @@ void Player::Update(const Input& input, float dt)
             rigidBody.velocity.y = 0.0f;
         }
     }
-    if(transform.position.y >= 800)
+    if(stop)
     {
-        //transform.position.y = 800.0f;
+        rigidBody.velocity.x = 0.0f;
+        rigidBody.velocity.y = 0.0f;
     }if(hp <= 0){
         alive = false;
     }
@@ -155,12 +161,26 @@ void Player::PositionSword()
         if(positionFacing == "Right" || positionFacing == "Left")
         {
             swordTransform.position.x = transform.position.x + swordScale;
-            swordTransform.rotation.z = 0.0f;
+            if(positionFacing == "Right")
+            {
+                swordTransform.rotation.z = 180.0f;
+            }
+            else
+            {
+                swordTransform.rotation.z = 0.0f;
+            }
         }
         else if(positionFacing == "Up" || positionFacing == "Down")
         {
             swordTransform.position.y = transform.position.y + swordScale;
-            swordTransform.rotation.z = 90.0f;
+            if(positionFacing == "Up")
+            {
+                swordTransform.rotation.z = 270.0f;
+            }
+            else
+            {
+                swordTransform.rotation.z = 90.0f;
+            }
         }
     }
     items["sword"]->transform = swordTransform;

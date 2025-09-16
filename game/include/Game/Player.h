@@ -20,6 +20,7 @@ public:
     bool hit = false;
     bool alive = true;
     bool usingSword = false;
+    bool stop = false;
     std::string positionFacing = "Down";
 
     int hp;

@@ -11,7 +11,8 @@ int main()
     
     Application app;
     
-    if(!app.Create("Game", 1067, 800)){
+    if(!app.Create("Game", 1067, 600)){
+        //1067 / 600 = 1.7783333
         std::cout << "Error Creating Engine" << std::endl;
     }
     else{
